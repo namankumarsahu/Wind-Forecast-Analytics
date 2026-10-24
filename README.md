@@ -219,7 +219,7 @@ Checked by running the commands in this README on a Windows machine (Python 3.14
 - ✅ **Frontend:** `npm run lint`, `npm run typecheck` and `npm run build` pass.
 - ✅ **Live data:** the dashboard loads real January 2026 data from Elexon (744 matched periods for the full month, i.e. 50% of 1,488 half-hours, as expected with hourly forecasts).
 - ✅ **Docker Compose:** `docker compose up --build` builds both images, the backend health check passes and the UI proxies `/api` to the backend.
-- ⚠️ **Not done yet:** public deployment (Render / Vercel). No public URL is claimed anywhere in this repository.
+- ✅ **Deployment:** the frontend is deployed on Vercel at https://wind-forecast-analytics-gamma.vercel.app/ (backend hosted separately, see [Deployment](#deployment)). Note: the backend runs on a free tier that sleeps when idle, so the first load after a pause can take about a minute while data is re-downloaded.
 
 Observation worth knowing before presenting: over the full month the selected forecasts over-estimate on average (large positive MBE). The app reports exactly what the data shows; the likely reasons (e.g. differences in what the two Elexon datasets cover) have not been investigated here.
 
