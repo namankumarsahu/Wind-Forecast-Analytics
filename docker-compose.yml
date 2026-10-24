@@ -1,0 +1,38 @@
+# Start everything:  docker compose up --build
+#   UI:       http://localhost:18080
+#   API docs: http://localhost:8000/docs
+services:
+  backend:
+    build: ./backend
+    environment:
+      CORS_ORIGINS: "http://localhost:18080,http://localhost:5173"
+      CACHE_DIR: /data/cache
+      PREFETCH_ON_STARTUP: "true"   # warm the cache for the whole of January in the background
+    volumes:
+      - elexon-cache:/data/cache
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: ""        # same-origin: nginx proxies /api -> backend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "18080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  elexon-cache:
