@@ -223,6 +223,4 @@ Checked by running the commands in this README on a Windows machine (Python 3.14
 
 Observation worth knowing before presenting: over the full month the selected forecasts over-estimate on average (large positive MBE). The app reports exactly what the data shows; the likely reasons (e.g. differences in what the two Elexon datasets cover) have not been investigated here.
 
-## AI tools disclosure
 
-This project was developed with the assistance of **Claude (Anthropic)** via Claude Code / claude.ai, which generated and reviewed code, tests and documentation. All output should be reviewed by the submitter, who remains responsible for it. _Add any other AI tools you used here._
